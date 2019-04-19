@@ -3,7 +3,9 @@ const User = require('./models/user');
 
 const router = express.Router();
 
-router.post('/courses', (req, res, next) => {
+
+//
+router.post('/users', (req, res, next) => {
     if (req.body.fullName &&
         req.body.email &&
         req.body.password) {
@@ -24,7 +26,7 @@ router.post('/courses', (req, res, next) => {
                 }
             });
     } else {
-        const err = new Error('Full Name, Email, and Password is required');
+        const err = new Error('Full Name, Email, and Password are required');
         err.status = 400;
         return next(err);
     }
