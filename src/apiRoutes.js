@@ -1,10 +1,11 @@
 const express = require('express');
 const User = require('./models/user');
+const Course = require('./models/course');
 
 const router = express.Router();
 
 
-//
+//Route to create a new user
 router.post('/users', (req, res, next) => {
     if (req.body.fullName &&
         req.body.email &&
@@ -30,6 +31,22 @@ router.post('/users', (req, res, next) => {
         err.status = 400;
         return next(err);
     }
-})
+});
+
+//Route to get all courses
+router.get('/courses', (req, res, next) => {
+    return Course.find({}, {title: true}, (err, results) => {
+        if(err) return next(err);
+        res.json(results);
+    });
+});
+
+//Route to get a specific course
+router.get('/courses/:courseID', (req, res, next) => {
+    return Course.findById(req.params.courseID, (err, course) => {
+        if(err) return next(err);
+        res.json(course);
+    })
+});
 
 module.exports = router;
