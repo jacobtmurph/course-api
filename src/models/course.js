@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-// const Review = require('./review');
-// const User = require('./user');
+
 
 const CourseSchema = new mongoose.Schema({
     user: {
@@ -28,8 +27,13 @@ const CourseSchema = new mongoose.Schema({
             required: true
         }
     }],
-    reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
+    reviews: [
+        {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Review'
+        }
+    ]
 });
 
-const Course = mongoose.model('Course', CourseSchema);
+const Course = mongoose.model('Course', CourseSchema, 'courses');
 module.exports = Course;

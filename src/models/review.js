@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const User = require('./user');
 
 const ReviewSchema = new mongoose.Schema({
     user: {
@@ -7,7 +6,7 @@ const ReviewSchema = new mongoose.Schema({
         ref: 'User'
     },
     postedOn: {
-        type: Date(),
+        type: Date,
         default: Date.now
     },
     rating: {
@@ -18,5 +17,5 @@ const ReviewSchema = new mongoose.Schema({
     review: String
 });
 
-const Review = mongoose.model('Review', ReviewSchema);
+const Review = mongoose.model('Review', ReviewSchema, 'reviews');
 module.exports = Review;

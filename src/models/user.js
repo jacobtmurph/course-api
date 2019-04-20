@@ -19,6 +19,28 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
+//Authenticate User Method
+UserSchema.statics.authenticate = function(email, pass, callback) {
+    User.findOne({emailAddress: email})
+        .exec((error, user) => {
+                if (error) {
+                    return callback(error);
+                } else if (!user) {
+                    const err = new Error("User not found");
+                    err.status = 401;
+                    return callback(err);
+                }
+
+                bcrypt.compare(pass, user.password, function(error, result) {
+                    if (result === true) {
+                        return callback(null, user);
+                    } else {
+                        return callback();
+                    }
+                });
+        });
+};
+
 //Hash user password before saving
 UserSchema.pre('save', function(next){
     const user = this;
@@ -31,5 +53,5 @@ UserSchema.pre('save', function(next){
     });
 });
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema, 'users');
 module.exports = User;
