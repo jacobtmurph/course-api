@@ -5,7 +5,7 @@ A RESTful, authenticated course-rating API build in Express &amp; MongoDB.
 # Installation
 This package and it's dependancies can be installed via the `npm i` command, and run via `npm start.`
 
-##To add some example data & users, navigate to the `seed data` directory and run the following commands:
+## To add some example data & users, navigate to the `seed data` directory and run the following commands:
 
 ```
 mongoimport --db course-api --collection courses --type=json --jsonArray --file courses.json
